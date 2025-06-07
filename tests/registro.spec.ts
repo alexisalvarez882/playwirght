@@ -30,5 +30,32 @@ test('TC-4 Verificar redireccionamiento a página de inicio de sesión al hacer 
   await expect(page).toHaveURL('http://localhost:3000/login');
 });
 
+test('TC-5 Verificar Registro exitoso con datos válidos', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.locator('input[name="firstName"]').fill('Alexis');
+  await page.locator('input[name="lastName"]').fill('Alvarez');
+  await page.locator('input[name="email"]').fill('alexisalvarez' + Date.now().toString() + '@email.com');
+  await page.locator('input[name="password"]').fill('123456');
+  await page.getByTestId('boton-registrarse').click();
+  await expect(page.getByText('Registro exitoso')).toBeVisible();
+});
 
+test('TC-6 Verificar que un usuario no pueda registrarse con un correo electrónico ya existente', async ({ page }) => {
+  const email = 'alexisalvarez' + Date.now().toString() + '@email.com';
+  await page.goto('http://localhost:3000/');
+  await page.locator('input[name="firstName"]').fill('Juan');
+  await page.locator('input[name="lastName"]').fill('Torres');
+  await page.locator('input[name="email"]').fill(email);
+  await page.locator('input[name="password"]').fill('123456');
+  await page.getByTestId('boton-registrarse').click();
+  await expect(page.getByText('Registro exitoso')).toBeVisible();
+  await page.goto('http://localhost:3000/');
+  await page.locator('input[name="firstName"]').fill('Juan');
+  await page.locator('input[name="lastName"]').fill('Torres');
+  await page.locator('input[name="email"]').fill(email);
+  await page.locator('input[name="password"]').fill('123456');
+  await page.getByTestId('boton-registrarse').click();
+  await expect(page.getByText('Email already in use')).toBeVisible();
+  await expect(page.getByText('Registro exitoso')).not.toBeVisible();
+});
 
