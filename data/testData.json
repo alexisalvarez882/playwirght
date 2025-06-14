@@ -1,0 +1,32 @@
+{
+    "validUser": {
+        "firstName": "Alexis",
+        "lastName": "Alvarez",
+        "email": "aalvarezfreitas@gmail.com",
+        "password": "Change1234!",
+        "confirmPassword": "Password123!",
+        "phone": "+1234567890",
+        "address": {
+            "street": "123 Main St",
+            "city": "Ciudad",
+            "state": "Estado",
+            "zip": "12345",
+            "country": "Pais"
+        }
+    },
+    "invalidUser": {
+        "firstName": "Alexis",
+        "lastName": "Alvarez",
+        "email": "aalvarezfreitas@gmail.com",
+        "password": "Change123433!",
+        "confirmPassword": "Password123!",
+        "phone": "+1234567890",
+        "address": {
+            "street": "123 Main St",
+            "city": "Ciudad",
+            "state": "Estado",
+            "zip": "12345",
+            "country": "Pais"
+        }
+    }
+}
